@@ -35,6 +35,7 @@ constructor() {
   this.state = {
 
     input: '',
+    imageURL: '',
 
   }
 
@@ -42,13 +43,15 @@ constructor() {
 }
 
 onInputChange = (event) => {
-console.log(event.target.value)
+this.setState({input: event.target.value});
 }
 
 onButtonSubmit = () => {
 console.log('click');
 
-app.models.predict("a403429f2ddf4b49b307e318f00e528b", "https://samples.clarifai.com/face-det.jpg").then(
+this.setState({imageURL: this.state.input});
+
+app.models.predict(Clarifai.COLOR_MODEL, "https://samples.clarifai.com/face-det.jpg").then(
     function(response) {
       console.log(response);
     },
@@ -78,7 +81,7 @@ app.models.predict("a403429f2ddf4b49b307e318f00e528b", "https://samples.clarifai
         <Logo />
         <Rank />
         <ImageLinkForm  onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
-        <FaceRecognition />
+        <FaceRecognition imageURL={this.state.imageURL} />
       </div>
     );
   }
