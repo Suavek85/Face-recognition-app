@@ -8,7 +8,6 @@ import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import Particles from 'react-particles-js';
 import Clarifai from 'clarifai';
 
-
 const app = new Clarifai.App({
   apiKey: '7843a514af414819aee50b219a739f41'
  });
@@ -25,6 +24,8 @@ density: {
     }
   }
 }
+
+
 
 class App extends Component {
 
@@ -61,7 +62,7 @@ return {
  
 displayFaceBox = (box) => {
 
-  console.log(box);
+console.log(box);
 this.setState({ box: box });
 
 }
@@ -91,7 +92,7 @@ app.models.predict(Clarifai.FACE_DETECT_MODEL, this.state.input).then(response =
         <Logo />
         <Rank />
         <ImageLinkForm  onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
-        <FaceRecognition imageURL={this.state.imageURL} />
+        <FaceRecognition box={this.state.box} imageURL={this.state.imageURL} />
       </div>
     );
   }
